@@ -1,399 +1,296 @@
-<!doctype>
+<!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>HTML Fields and Prompts</title>
-<style>
-html {
-  font-size: 16px;
-}
-
-body {
-  font: 1.2rem/1.5 BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  padding: 3rem;
-}
-
-.section + .section {
-  padding-top: 1.5rem;
-}
-
-h2 {
-  margin-top: 0;
-}
-
-.section h2:hover {
-  cursor: pointer;
-}
-
-.section h2:hover:after {
-  content: "(close)";
-  font-size: 1rem;
-  font-weight: 400;
-  opacity: .5;
-  padding-left: 1rem;
-}
-
-.section[data-hidden="true"] h2:hover:after {
-  content: "(open)";
-}
-
-.section ol,
-.section ul {
-  color: #999;
-}
-
-.section li + li {
-  margin-top: 1rem;
-}
-
-.section li a {
-  display: block;
-  margin: -.5rem .5rem;
-  padding: .5rem 1rem .5rem;
-}
-
-.section li a:hover {
-  background-color: darkblue;
-  color: #fff;
-}
-
-.section li a:visited:hover {
-  background-color: purple;
-}
-
-.section li a code {
-  display: block;
-  font-size: 1rem;
-  opacity: .6;
-  text-indent: -1.5rem;
-  padding-left: 2.5rem;
-}
-
-.section li tt {
-  font-weight: 600;
-}
-</style>
-</head>
-<body>
-  <!-- TO ADD: -->
-  <!-- contenteditable -->
-  <!-- alert -->
-  <!-- confirm -->
-  <!-- prompt -->
-  <!-- password -->
-  <!-- autocomplete -->
-  <!-- placeholder text -->
-  <!-- input[type=search] -->
-  <!-- input[type=range] -->
-  <!-- input[type=color] -->
-  <!-- input[type=tel] -->
-  <!-- `alt` attribute -->
-  <!-- <figure> -->
-  <!-- <img srcset> -->
-  <!-- <details> <details open> -->
-  <!-- basic auth -->
-  <section id="forms" class="section section-forms">
-    <h2>Forms</h2>
-    <ol>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/date-picker-fallback/index.html">Date Picker <code>&lt;input type="date"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/datetime-local-example/index.html">Date-Time <strong>Local</strong> Picker <code>&lt;input type="date"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/datetime-local-picker-fallback/index.html">Date-Time <strong>Fallback</strong> Picker <code>&lt;input type="date"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/editable-input-example/editable_input.html">Editable Form Fields <code>&lt;textarea&gt;&lt;/textarea&gt;</code> <code>&lt;input type="text"&gt;</code> <code>&lt;input type="reset"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/file-examples/file-example.html">Complete File Field <code>&lt;input type="file" accept=".jpg, .jpeg, .png" multiple&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/file-examples/file-with-accept.html">File Field w/ <strong>Accepted</strong> File Extensions <code>&lt;input type="file" accept=".jpg, .jpeg, .png"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/file-examples/simple-file.html">File Field w/ Selecting <strong>Multiple</strong> Files <code>&lt;input type="file" multiple&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-start.html">Text Field <code>&lt;input type="text"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-required.html">Form Validation w/ <strong>Required</strong> <code>&lt;input type="text" required&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-length.html">Form Validation w/ <strong>Length</strong> <code>&lt;input type="text" required minlength="6" maxlength="6"&gt;</code> <code>&lt;input type="number" value="1" min="1" max="10"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-pattern.html">Form Validation w/ <strong>Pattern</strong> <code>&lt;input type="text" required pattern="banana|cherry"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-max.html">Form Validation w/ <strong>Min/Max</strong>, <strong>Length</strong>, and <strong>Pattern</strong> <code>&lt;input type="number" pattern="\d+" min="12" max="120"&gt;</code> <code>&lt;textarea rows="5" maxlength="10"&gt;&lt;/textarea&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/hidden-input-example/index.html"><strong>Hidden</strong> Input <code>&lt;input type="hidden" value="34657"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/html-form-structure/checkbox-label.html"><strong>Checkbox</strong> Inputs and Labels <code>&lt;label for="…"&gt;&lt;/label&gt;</code> <code>&lt;input type="checkbox"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/html-form-structure/fieldset-legend.html"><strong>Fieldset</strong> and <strong>Legend</strong> <code>&lt;fieldset&gt;</code> <code>&lt;legend&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/html-form-structure/payment-form.html">Complete Form for Custom <strong>User Registration</strong> <code>&lt;input type="radio"&gt;</code> <code>&lt;input type="text"&gt;</code> <code>&lt;input type="email"&gt;</code> <code>&lt;input type="password"&gt;</code> <code>&lt;select&gt;</code> <code>&lt;button type="submit"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/image-type-example/index.html"><strong>Image</strong> as Form Button <code>&lt;input type="image" src="login.png" alt="login button"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/image-type-example/xy-coordinates-example.html"><strong>Image</strong> as Form Button w/ <strong>X, Y Coordinates</strong> <code>&lt;input id="image" type="image" src="colors.png" alt="image of four colored squares"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/indeterminate-example/index.html">Form <strong>Wizard</strong> w/ Events and Callbacks <code>&lt;input id="checkbox" checked onclick="…"&gt;</code> <code>&lt;label for="…"&gt;</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/month-examples/month-validation.html">Form <strong>Validation</strong> for <strong>Months</strong> <code>&lt;input type="month" min="2017-06" max="2017-09" required&gt;</code> <code>&lt;input type="submit"&gt;</code> <code data-lang="css">input:valid</code> <code data-lang="css">input:invalid</code></a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/single-line-text-fields.html"><strong>Single-Line Text</strong> Fields
-          <code>&lt;input type="text" value="I'm a text field"&gt;</code>
-          <code>&lt;input type="email" multiple&gt;</code>
-          <code>&lt;input type="password"&gt;</code>
-          <code>&lt;input type="search"&gt;</code>
-          <code>&lt;input type="tel"&gt;</code>
-          <code>&lt;input type="url"&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/multi-line-text-fields.html"><strong>Multiple-Line Text</strong> Fields
-          <code>&lt;textarea cols="30" rows="10"&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/checkable-items.html"><strong>Checkable</strong> Fields
-          <code>&lt;input type="checkbox"&gt;</code>
-          <code>&lt;input type="radio"&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/drop-down-content.html"><strong>Drop-Down Select</strong> Fields
-          <code>&lt;select&gt;&lt;option&gt;…&lt;/option&gt;&lt;/select&gt;</code>
-          <code>&lt;select&gt;&lt;optgroup&gt;&lt;option selected&gt;…&lt;/option&gt;&lt;/optggroup&gt;&lt;/select&gt;</code>
-          <code>&lt;select multiple&gt;&lt;option&gt;…&lt;/option&gt;&lt;/select&gt;</code>
-          <code>&lt;input type="text" list="mySuggestion"&gt;<br>
-            &lt;datalist id="mySuggestion"&gt;<br>
-            &nbsp;&nbsp;&lt;option&gt;…&lt;/option&gt;<br>
+  <head>
+    <meta charset="utf-8">
+    <title>HTML Fields and Prompts</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- TO ADD: -->
+    <!-- contenteditable -->
+    <!-- alert -->
+    <!-- confirm -->
+    <!-- prompt -->
+    <!-- password -->
+    <!-- autocomplete -->
+    <!-- placeholder text -->
+    <!-- input[type=search] -->
+    <!-- input[type=range] -->
+    <!-- input[type=color] -->
+    <!-- input[type=tel] -->
+    <!-- `alt` attribute -->
+    <!-- <figure> -->
+    <!-- <img srcset> -->
+    <!-- <details> <details open> -->
+    <!-- basic auth -->
+    <section id="forms" class="section section-forms">
+      <h2>Forms</h2>
+      <ol>
+        <li>
+          <a href="./select.html"><strong>Select</strong> Drop-Down Field <code>&lt;select&gt;&lt;/select&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/date-picker-fallback/index.html">Date Picker <code>&lt;input type="date"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/datetime-local-example/index.html">Date-Time <strong>Local</strong> Picker <code>&lt;input type="date"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/datetime-local-picker-fallback/index.html">Date-Time <strong>Fallback</strong> Picker <code>&lt;input type="date"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/editable-input-example/editable_input.html">Editable Form Fields <code>&lt;textarea&gt;&lt;/textarea&gt;</code> <code>&lt;input type="text"&gt;</code> <code>&lt;input type="reset"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/file-examples/file-example.html">Complete File Field <code>&lt;input type="file" accept=".jpg, .jpeg, .png" multiple&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/file-examples/file-with-accept.html">File Field w/ <strong>Accepted</strong> File Extensions <code>&lt;input type="file" accept=".jpg, .jpeg, .png"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/file-examples/simple-file.html">File Field w/ Selecting <strong>Multiple</strong> Files <code>&lt;input type="file" multiple&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-start.html">Text Field <code>&lt;input type="text"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-required.html">Form Validation w/ <strong>Required</strong> <code>&lt;input type="text" required&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-length.html">Form Validation w/ <strong>Length</strong> <code>&lt;input type="text" required minlength="6" maxlength="6"&gt;</code> <code>&lt;input type="number" value="1" min="1" max="10"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-pattern.html">Form Validation w/ <strong>Pattern</strong> <code>&lt;input type="text" required pattern="banana|cherry"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/form-validation/fruit-max.html">Form Validation w/ <strong>Min/Max</strong>, <strong>Length</strong>, and <strong>Pattern</strong> <code>&lt;input type="number" pattern="\d+" min="12" max="120"&gt;</code> <code>&lt;textarea rows="5" maxlength="10"&gt;&lt;/textarea&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/hidden-input-example/index.html"><strong>Hidden</strong> Input <code>&lt;input type="hidden" value="34657"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/html-form-structure/checkbox-label.html"><strong>Checkbox</strong> Inputs and Labels <code>&lt;label for="…"&gt;&lt;/label&gt;</code> <code>&lt;input type="checkbox"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/html-form-structure/fieldset-legend.html"><strong>Fieldset</strong> and <strong>Legend</strong> <code>&lt;fieldset&gt;</code> <code>&lt;legend&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/html-form-structure/payment-form.html">Complete Form for Custom <strong>User Registration</strong> <code>&lt;input type="radio"&gt;</code> <code>&lt;input type="text"&gt;</code> <code>&lt;input type="email"&gt;</code> <code>&lt;input type="password"&gt;</code> <code>&lt;select&gt;</code> <code>&lt;button type="submit"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/image-type-example/index.html"><strong>Image</strong> as Form Button <code>&lt;input type="image" src="login.png" alt="login button"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/image-type-example/xy-coordinates-example.html"><strong>Image</strong> as Form Button w/ <strong>X, Y Coordinates</strong> <code>&lt;input id="image" type="image" src="colors.png" alt="image of four colored squares"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/indeterminate-example/index.html">Form <strong>Wizard</strong> w/ Events and Callbacks <code>&lt;input id="checkbox" checked onclick="…"&gt;</code> <code>&lt;label for="…"&gt;</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/month-examples/month-validation.html">Form <strong>Validation</strong> for <strong>Months</strong> <code>&lt;input type="month" min="2017-06" max="2017-09" required&gt;</code> <code>&lt;input type="submit"&gt;</code> <code data-lang="css">input:valid</code> <code data-lang="css">input:invalid</code></a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/single-line-text-fields.html"><strong>Single-Line Text</strong> Fields
+            <code>&lt;input type="text" value="I'm a text field"&gt;</code>
+            <code>&lt;input type="email" multiple&gt;</code>
+            <code>&lt;input type="password"&gt;</code>
+            <code>&lt;input type="search"&gt;</code>
+            <code>&lt;input type="tel"&gt;</code>
+            <code>&lt;input type="url"&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/multi-line-text-fields.html"><strong>Multiple-Line Text</strong> Fields
+            <code>&lt;textarea cols="30" rows="10"&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/checkable-items.html"><strong>Checkable</strong> Fields
+            <code>&lt;input type="checkbox"&gt;</code>
+            <code>&lt;input type="radio"&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/drop-down-content.html"><strong>Drop-Down Select</strong> Fields
+            <code>&lt;select&gt;&lt;option&gt;…&lt;/option&gt;&lt;/select&gt;</code>
+            <code>&lt;select&gt;&lt;optgroup&gt;&lt;option selected&gt;…&lt;/option&gt;&lt;/optggroup&gt;&lt;/select&gt;</code>
+            <code>&lt;select multiple&gt;&lt;option&gt;…&lt;/option&gt;&lt;/select&gt;</code>
+            <code>&lt;input type="text" list="mySuggestion"&gt;<br>
+              &lt;datalist id="mySuggestion"&gt;<br>
+              &nbsp;&nbsp;&lt;option&gt;…&lt;/option&gt;<br>
+              &lt;/datalist&gt;</code>
+            <code>&lt;label for="myFruit"&gt;What is your favorite fruit? (With fallback)&lt;/label&gt;<br>
+            &lt;input type="text" id="myFruit" name="fruit" list="fruitList"&gt;<br>
+            &lt;datalist id="fruitList"&gt;<br>
+            &nbsp;&nbsp;&lt;label for="suggestion"&gt;or pick a fruit&lt;/label&gt;<br>
+            &nbsp;&nbsp;&lt;select id="suggestion"&gt;&lt;option&gt;…&lt;/option&gt;&lt;/select&gt;<br>
             &lt;/datalist&gt;</code>
-          <code>&lt;label for="myFruit"&gt;What is your favorite fruit? (With fallback)&lt;/label&gt;<br>
-          &lt;input type="text" id="myFruit" name="fruit" list="fruitList"&gt;<br>
-          &lt;datalist id="fruitList"&gt;<br>
-          &nbsp;&nbsp;&lt;label for="suggestion"&gt;or pick a fruit&lt;/label&gt;<br>
-          &nbsp;&nbsp;&lt;select id="suggestion"&gt;&lt;option&gt;…&lt;/option&gt;&lt;/select&gt;<br>
-          &lt;/datalist&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/button-examples.html"><strong>Buttons</strong>
-          <code>&lt;button type="submit"&gt;…&lt;button&gt;</code>
-          <code>&lt;input type="submit" value="This is a submit button"&gt;</code>
-          <code>&lt;button type="reset"&gt;…&lt;button&gt;</code>
-          <code>&lt;input type="reset" value="This is a reset button"&gt;</code>
-          <code>&lt;button type="button"&gt;…&lt;button&gt;</code>
-          <code>&lt;input type="button" value="This is an anonymous button"&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/other-examples.html"><strong>Other Form</strong> Fields
-          <code>&lt;input type="file" accept="image/*" multiple&gt;</code>
-          <code>&lt;input type="hidden" name="timestamp" value="1286705410"&gt;</code>
-          <code>&lt;input type="image" name="pos" alt="" src="map.png"&gt;</code>
-          <code>&lt;input type="reset" value="This is a reset button"&gt;</code>
-          <code>&lt;progress max="100" value="75"&gt;75/100&lt;/progress&gt;</code>
-          <code>&lt;meter min="0" max="100" value="75" low="33" high="66" optimum="50"&gt;75&lt;/meter&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/advanced-examples.html"><strong>Advanced Form</strong> Fields
-          <code>&lt;input type="number" name="age" id="age" min="1" max="10" step="2"&gt;</code>
-          <code>&lt;input type="range" name="beans" id="beans" min="0" max="500" step="10"&gt;</code>
-          <code>&lt;input type="date" name="myDate" min="2013-06-01" max="2013-08-31" id="myDate"&gt;</code>
-          <code>&lt;input type="datetime-local" name="meet" id="meet"&gt;</code>
-          <code>&lt;input type="month" name="month" id="month"&gt;</code>
-          <code>&lt;input type="time" name="time" id="time"&gt;</code>
-          <code>&lt;input type="color" name="color" id="color"&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/number-example/index.html"><strong>Number</strong> Fields w/ Various Form Validation
-          <code>&lt;input id="meters" type="number" name="meters" step="0.01" min="0" placeholder="e.g. 1.78" required&gt;</code>
-          <code>&lt;input id="feet" type="number" name="feet" min="0" step="1"&gt;</code>
-          <code>&lt;input id="inches" type="number" name="inches" min="0" max="11" step="1"&gt;</code>
-          <code>&lt;input type="button" class="meters" value="Enter height in feet and inches"&gt;</code>
-          <code>&lt;input type="submit" value="Submit form"&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/select-example/index.html"><strong>Drop-Down Select</strong> Fields w/ Selecting <strong>Multiple</strong> and <strong>Disabled</strong> Options
-          <code>&lt;select id="pet-select" name="pet" multiple size="4"&gt;</code>
-          <code>&nbsp;&lt;option value="none" selected&gt;-- Please choose one or more --&lt;/option&gt;</code>
-          <code>&nbsp;&lt;optgroup label="4-legged pets"&gt;</code>
-          <code>&nbsp;&nbsp;&lt;option value="dog"&gt;Dog&lt;/option&gt;</code>
-          <code>&nbsp;&nbsp;&lt;option value="cat"&gt;Cat&lt;/option&gt;</code>
-          <code>&nbsp;&nbsp;&lt;option value="hamster" disabled&gt;Hamster&lt;/option&gt;</code>
-          <code>&nbsp;&lt;/optgroup&gt;</code>
-          <code>&nbsp;&lt;optgroup label="Flying pets"&gt;</code>
-          <code>&nbsp;&nbsp;&lt;option value="parrot"&gt;Parrot&lt;/option&gt;</code>
-          <code>&nbsp;&nbsp;&lt;option value="macaw"&gt;Macaw&lt;/option&gt;</code>
-          <code>&nbsp;&nbsp;&lt;option value="albatross"&gt;Albatross&lt;/option&gt;</code>
-          <code>&nbsp;&lt;/optgroup&gt;</code>
-          <code>&lt;/select&gt;</code>
-        </a>
-      </li>
-      <li>
-        <!-- See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data -->
-        <a href="https://mdn.github.io/learning-area/html/forms/sending-form-data/get-method.html">Submitting Form w/ <strong>GET</strong> Method
-          <code>&lt;form action="http://foo.com" method="get"&gt;…&lt;form&gt;</code>
-        </a>
-      </li>
-      <li>
-        <!-- See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data -->
-        <a href="https://mdn.github.io/learning-area/html/forms/sending-form-data/post-method.html">Submitting Form w/ <strong>POST</strong> Method
-          <code>&lt;form action="http://foo.com" method="post"&gt;…&lt;form&gt;</code>
-        </a>
-      </li>
-      <!--
-      <li>
-        See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data
-        <a href="https://mdn.github.io/learning-area/html/forms/sending-form-data/php-example.html">Submitting Form w/ <strong>POST</strong> Method and <strong>PHP Server-Side Endpoint</strong>
-          <code>&lt;form action="http://foo.com" method="post"&gt;…&lt;form&gt;</code>
-        </a>
-      </li>
-      -->
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/tel-example/index.html"><strong>Telephone</strong> Fields w/ <strong>Patterns</strong> and Validation
-          <code>&lt;input id="areaNo" name="areaNo" type="tel" required placeholder="Area code" pattern="[0-9]{3}" aria-label="Area code"&gt;</code>
-          <code>&lt;input id="number1" name="number1" type="tel" required placeholder="First part" pattern="[0-9]{3}" aria-label="First part of number"&gt;</code>
-          <code>&lt;input id="number2" name="number2" type="tel" required placeholder="Second part" pattern="[0-9]{4}" aria-label="Second part of number"&gt;</code>
-          <code>&lt;select name="country"&gt;&lt;option&gt;…&lt;/option&gt;…&lt;option selected&gt;…&lt;/option&gt;&lt;/select&gt;</code>
-          <code data-lang="css">input:valid</code>
-          <code data-lang="css">input:invalid</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/text-example/index.html"><strong>Text</strong> (Username) Field w/ <strong>Pattern</strong> and Validation
-          <code>&lt;input type="text" id="uname" name="name" required placeholder="Usernames must be lowercase and 4-8 characters in length" pattern="[a-z]{4,8}"&gt;</code>
-          <code>&lt;button&gt;&lt;/button&gt;</code>
-          <code data-lang="css">input:valid</code>
-          <code data-lang="css">input:invalid</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/time-example/index.html"><strong>Time</strong> Field w/ <strong>Pattern</strong> and Validation
-          <code>&lt;input type="time" name="appt-time" min="12:00" max="18:00" required&gt;</code>
-          <code>&lt;input type="submit" value="Submit form"&gt;</code>
-          <code data-lang="css">input:valid</code>
-          <code data-lang="css">input:invalid</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/url-example/index.html"><strong>URL</strong> Field w/ <strong>Pattern</strong> and Validation
-          <code>&lt;input type="url" required pattern=".*\.myco\..*" title="URL should be in a myco domain"&gt;</code>
-          <code>&lt;input type="text" name="myComment" required&gt;</code>
-          <code>&lt;button&gt;&lt;/button&gt;</code>
-          <code data-lang="css">input:valid</code>
-          <code data-lang="css">input:invalid</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/forms/week-example/index.html"><strong>Week</strong> Field w/ <strong>Min/Max</strong> and Validation
-          <code>&lt;input type="week" name="week" min="2017-W01" max="2017-W52" required&gt;</code>
-          <code>&lt;input type="submit" value="Submit form"&gt;</code>
-          <code data-lang="css">input:valid</code>
-          <code data-lang="css">input:invalid</code>
-        </a>
-      </li>
-    </ol>
-  </section>
-  <section id="media" class="section section-media">
-    <h2>Media</h2>
-    <ol>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/simple-video.html">Simple <strong>Video</strong> w/ <tt>src</tt> and <tt>controls</tt>
-          <code>&lt;video src="rabbit320.webm" controls&gt;…&lt;/video&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/multiple-video-formats.html"><strong>Video</strong> w/ <strong>Multiple</strong> <tt>source</tt>s and <tt>controls</tt>
-          <code>&lt;video controls&gt;</code>
-          <code>&nbsp;&nbsp;&lt;source src="rabbit320.mp4" type="video/mp4"&gt;</code>
-          <code>&nbsp;&nbsp;&lt;source src="rabbit320.webm" type="video/webm"&gt;</code>
-          <code>&lt;/video&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/multiple-video-formats-no-controls.html"><strong>Video</strong> w/ <strong>Multiple</strong> <tt>source</tt>s and <strong>No</strong> <tt>controls</tt>
-          <code>&lt;video&gt;</code>
-          <code>&nbsp;&nbsp;&lt;source src="rabbit320.mp4" type="video/mp4"&gt;</code>
-          <code>&nbsp;&nbsp;&lt;source src="rabbit320.webm" type="video/webm"&gt;</code>
-          <code>&lt;/video&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/multiple-audio-formats.html"><strong>Audio</strong> w/ <strong>Multiple</strong> <tt>source</tt>s and <tt>controls</tt>
-          <code>&lt;audio controls&gt;</code>
-          <code>&nbsp;&nbsp;&lt;source src="viper.mp3" type="audio/mp3"&gt;</code>
-          <code>&nbsp;&nbsp;&lt;source src="viper.ogg" type="audio/ogg"&gt;</code>
-          <code>&lt;/audio&gt;</code>
-        </a>
-      </li>
-      <li>
-        <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/extra-video-features.html">Extra <strong>Video</strong> w/ <strong>Multiple</strong> <tt>source</tt>s, <tt>controls</tt>, and More
-          <code>&lt;video controls width="400" height="400" loop muted preload="auto" poster="poster.png"&gt;</code>
-          <code>&nbsp;&nbsp;&lt;source src="rabbit320.mp4" type="video/mp4"&gt;</code>
-          <code>&nbsp;&nbsp;&lt;source src="rabbit320.webm" type="video/webm"&gt;</code>
-          <code>&lt;/video&gt;</code>
-        </a>
-      </li>
-    </ol>
-  </section>
-  <script>
-(function () {
-  let hiddenSections = {};
-  try {
-    JSON.parse(localStorage.hidden_sections || '[]').forEach(sectionId => {
-      hiddenSections[sectionId] = true;
-      const sectionEl = document.getElementById(sectionId);
-      if (!sectionEl) {
-        return;
-      }
-      const sectionListEl = sectionEl.querySelector('ol, ul');
-      if (!sectionListEl) {
-        return;
-      }
-      sectionListEl.hidden = true;
-    });
-  } catch (err) {
-  }
-  window.addEventListener('click', evt => {
-    const target = evt.target;
-    if (!target || !target.closest('h2')) {
-      return;
-    }
-    const targetSectionEl = target.closest('section');
-    if (!targetSectionEl) {
-      return;
-    }
-    const targetSectionListEl = targetSectionEl.querySelector('ol, ul');
-    targetSectionListEl.hidden = !targetSectionListEl.hidden;
-    const isNowHidden = targetSectionEl.dataset.hidden = targetSectionListEl.hidden;
-    hiddenSections[targetSectionEl.id] = isNowHidden;
-    try {
-      localStorage.hidden_sections = JSON.stringify(Object.keys(hiddenSections).filter(key => hiddenSections[key] === true));
-    } catch (err) {
-    }
-  });
-})();
-  </script>
-</body>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/button-examples.html"><strong>Buttons</strong>
+            <code>&lt;button type="submit"&gt;…&lt;button&gt;</code>
+            <code>&lt;input type="submit" value="This is a submit button"&gt;</code>
+            <code>&lt;button type="reset"&gt;…&lt;button&gt;</code>
+            <code>&lt;input type="reset" value="This is a reset button"&gt;</code>
+            <code>&lt;button type="button"&gt;…&lt;button&gt;</code>
+            <code>&lt;input type="button" value="This is an anonymous button"&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/other-examples.html"><strong>Other Form</strong> Fields
+            <code>&lt;input type="file" accept="image/*" multiple&gt;</code>
+            <code>&lt;input type="hidden" name="timestamp" value="1286705410"&gt;</code>
+            <code>&lt;input type="image" name="pos" alt="" src="map.png"&gt;</code>
+            <code>&lt;input type="reset" value="This is a reset button"&gt;</code>
+            <code>&lt;progress max="100" value="75"&gt;75/100&lt;/progress&gt;</code>
+            <code>&lt;meter min="0" max="100" value="75" low="33" high="66" optimum="50"&gt;75&lt;/meter&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/native-form-widgets/advanced-examples.html"><strong>Advanced Form</strong> Fields
+            <code>&lt;input type="number" name="age" id="age" min="1" max="10" step="2"&gt;</code>
+            <code>&lt;input type="range" name="beans" id="beans" min="0" max="500" step="10"&gt;</code>
+            <code>&lt;input type="date" name="myDate" min="2013-06-01" max="2013-08-31" id="myDate"&gt;</code>
+            <code>&lt;input type="datetime-local" name="meet" id="meet"&gt;</code>
+            <code>&lt;input type="month" name="month" id="month"&gt;</code>
+            <code>&lt;input type="time" name="time" id="time"&gt;</code>
+            <code>&lt;input type="color" name="color" id="color"&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/number-example/index.html"><strong>Number</strong> Fields w/ Various Form Validation
+            <code>&lt;input id="meters" type="number" name="meters" step="0.01" min="0" placeholder="e.g. 1.78" required&gt;</code>
+            <code>&lt;input id="feet" type="number" name="feet" min="0" step="1"&gt;</code>
+            <code>&lt;input id="inches" type="number" name="inches" min="0" max="11" step="1"&gt;</code>
+            <code>&lt;input type="button" class="meters" value="Enter height in feet and inches"&gt;</code>
+            <code>&lt;input type="submit" value="Submit form"&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/select-example/index.html"><strong>Drop-Down Select</strong> Fields w/ Selecting <strong>Multiple</strong> and <strong>Disabled</strong> Options
+            <code>&lt;select id="pet-select" name="pet" multiple size="4"&gt;</code>
+            <code>&nbsp;&lt;option value="none" selected&gt;-- Please choose one or more --&lt;/option&gt;</code>
+            <code>&nbsp;&lt;optgroup label="4-legged pets"&gt;</code>
+            <code>&nbsp;&nbsp;&lt;option value="dog"&gt;Dog&lt;/option&gt;</code>
+            <code>&nbsp;&nbsp;&lt;option value="cat"&gt;Cat&lt;/option&gt;</code>
+            <code>&nbsp;&nbsp;&lt;option value="hamster" disabled&gt;Hamster&lt;/option&gt;</code>
+            <code>&nbsp;&lt;/optgroup&gt;</code>
+            <code>&nbsp;&lt;optgroup label="Flying pets"&gt;</code>
+            <code>&nbsp;&nbsp;&lt;option value="parrot"&gt;Parrot&lt;/option&gt;</code>
+            <code>&nbsp;&nbsp;&lt;option value="macaw"&gt;Macaw&lt;/option&gt;</code>
+            <code>&nbsp;&nbsp;&lt;option value="albatross"&gt;Albatross&lt;/option&gt;</code>
+            <code>&nbsp;&lt;/optgroup&gt;</code>
+            <code>&lt;/select&gt;</code>
+          </a>
+        </li>
+        <li>
+          <!-- See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data -->
+          <a href="https://mdn.github.io/learning-area/html/forms/sending-form-data/get-method.html">Submitting Form w/ <strong>GET</strong> Method
+            <code>&lt;form action="http://foo.com" method="get"&gt;…&lt;form&gt;</code>
+          </a>
+        </li>
+        <li>
+          <!-- See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data -->
+          <a href="https://mdn.github.io/learning-area/html/forms/sending-form-data/post-method.html">Submitting Form w/ <strong>POST</strong> Method
+            <code>&lt;form action="http://foo.com" method="post"&gt;…&lt;form&gt;</code>
+          </a>
+        </li>
+        <!--
+        <li>
+          See https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data
+          <a href="https://mdn.github.io/learning-area/html/forms/sending-form-data/php-example.html">Submitting Form w/ <strong>POST</strong> Method and <strong>PHP Server-Side Endpoint</strong>
+            <code>&lt;form action="http://foo.com" method="post"&gt;…&lt;form&gt;</code>
+          </a>
+        </li>
+        -->
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/tel-example/index.html"><strong>Telephone</strong> Fields w/ <strong>Patterns</strong> and Validation
+            <code>&lt;input id="areaNo" name="areaNo" type="tel" required placeholder="Area code" pattern="[0-9]{3}" aria-label="Area code"&gt;</code>
+            <code>&lt;input id="number1" name="number1" type="tel" required placeholder="First part" pattern="[0-9]{3}" aria-label="First part of number"&gt;</code>
+            <code>&lt;input id="number2" name="number2" type="tel" required placeholder="Second part" pattern="[0-9]{4}" aria-label="Second part of number"&gt;</code>
+            <code>&lt;select name="country"&gt;&lt;option&gt;…&lt;/option&gt;…&lt;option selected&gt;…&lt;/option&gt;&lt;/select&gt;</code>
+            <code data-lang="css">input:valid</code>
+            <code data-lang="css">input:invalid</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/text-example/index.html"><strong>Text</strong> (Username) Field w/ <strong>Pattern</strong> and Validation
+            <code>&lt;input type="text" id="uname" name="name" required placeholder="Usernames must be lowercase and 4-8 characters in length" pattern="[a-z]{4,8}"&gt;</code>
+            <code>&lt;button&gt;&lt;/button&gt;</code>
+            <code data-lang="css">input:valid</code>
+            <code data-lang="css">input:invalid</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/time-example/index.html"><strong>Time</strong> Field w/ <strong>Pattern</strong> and Validation
+            <code>&lt;input type="time" name="appt-time" min="12:00" max="18:00" required&gt;</code>
+            <code>&lt;input type="submit" value="Submit form"&gt;</code>
+            <code data-lang="css">input:valid</code>
+            <code data-lang="css">input:invalid</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/url-example/index.html"><strong>URL</strong> Field w/ <strong>Pattern</strong> and Validation
+            <code>&lt;input type="url" required pattern=".*\.myco\..*" title="URL should be in a myco domain"&gt;</code>
+            <code>&lt;input type="text" name="myComment" required&gt;</code>
+            <code>&lt;button&gt;&lt;/button&gt;</code>
+            <code data-lang="css">input:valid</code>
+            <code data-lang="css">input:invalid</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/forms/week-example/index.html"><strong>Week</strong> Field w/ <strong>Min/Max</strong> and Validation
+            <code>&lt;input type="week" name="week" min="2017-W01" max="2017-W52" required&gt;</code>
+            <code>&lt;input type="submit" value="Submit form"&gt;</code>
+            <code data-lang="css">input:valid</code>
+            <code data-lang="css">input:invalid</code>
+          </a>
+        </li>
+      </ol>
+    </section>
+    <section id="media" class="section section-media">
+      <h2>Media</h2>
+      <ol>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/simple-video.html">Simple <strong>Video</strong> w/ <tt>src</tt> and <tt>controls</tt>
+            <code>&lt;video src="rabbit320.webm" controls&gt;…&lt;/video&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/multiple-video-formats.html"><strong>Video</strong> w/ <strong>Multiple</strong> <tt>source</tt>s and <tt>controls</tt>
+            <code>&lt;video controls&gt;</code>
+            <code>&nbsp;&nbsp;&lt;source src="rabbit320.mp4" type="video/mp4"&gt;</code>
+            <code>&nbsp;&nbsp;&lt;source src="rabbit320.webm" type="video/webm"&gt;</code>
+            <code>&lt;/video&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/multiple-video-formats-no-controls.html"><strong>Video</strong> w/ <strong>Multiple</strong> <tt>source</tt>s and <strong>No</strong> <tt>controls</tt>
+            <code>&lt;video&gt;</code>
+            <code>&nbsp;&nbsp;&lt;source src="rabbit320.mp4" type="video/mp4"&gt;</code>
+            <code>&nbsp;&nbsp;&lt;source src="rabbit320.webm" type="video/webm"&gt;</code>
+            <code>&lt;/video&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/multiple-audio-formats.html"><strong>Audio</strong> w/ <strong>Multiple</strong> <tt>source</tt>s and <tt>controls</tt>
+            <code>&lt;audio controls&gt;</code>
+            <code>&nbsp;&nbsp;&lt;source src="viper.mp3" type="audio/mp3"&gt;</code>
+            <code>&nbsp;&nbsp;&lt;source src="viper.ogg" type="audio/ogg"&gt;</code>
+            <code>&lt;/audio&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/extra-video-features.html">Extra <strong>Video</strong> w/ <strong>Multiple</strong> <tt>source</tt>s, <tt>controls</tt>, and More
+            <code>&lt;video controls width="400" height="400" loop muted preload="auto" poster="poster.png"&gt;</code>
+            <code>&nbsp;&nbsp;&lt;source src="rabbit320.mp4" type="video/mp4"&gt;</code>
+            <code>&nbsp;&nbsp;&lt;source src="rabbit320.webm" type="video/webm"&gt;</code>
+            <code>&lt;/video&gt;</code>
+          </a>
+        </li>
+      </ol>
+    </section>
+    <script src="script.js"></script>
+  </body>
 </html>
