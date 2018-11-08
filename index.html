@@ -289,6 +289,77 @@
             <code>&lt;/video&gt;</code>
           </a>
         </li>
+        <!--
+          <li>
+            <a href="./video-playsinline.html">Extra <strong>Video</strong> w/ <strong>Multiple</strong> <tt>source</tt>s, <tt>controls</tt>, and More
+              <code>&lt;video controls width="400" height="400" loop muted preload="auto" poster="poster.png"&gt;</code>
+              <code>&nbsp;&nbsp;&lt;source src="rabbit320.mp4" type="video/mp4"&gt;</code>
+              <code>&nbsp;&nbsp;&lt;source src="rabbit320.webm" type="video/webm"&gt;</code>
+              <code>&lt;/video&gt;</code>
+            </a>
+          </li>
+        -->
+        <li>
+          <a href="./video-controls-no-loop.html">Video should <strong>not</strong> loop
+            <code>&lt;video src="rabbit320.webm" controls&gt;…&lt;/video&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="./video-controls-loop.html">Video should loop
+            <code>&lt;video src="rabbit320.webm" controls loop&gt;…&lt;/video&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="./video-controls-autoplay.html">Video should autoplay with volume on
+            <code>&lt;video src="rabbit320.webm" controls autoplay&gt;…&lt;/video&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="./video-controls-autoplay-muted.html">Video should autoplay and be muted
+            <code>&lt;video src="rabbit320.webm" controls muted autoplay&gt;…&lt;/video&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="./video-controls-autoplay-play-on-click.html">Video should autoplay / toggle on click
+            <code>&lt;video src="rabbit320.webm" controls autoplay onclick=&quot;…&quot;&gt;…&lt;/video&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="./video-local-files.html">Video local files (e.g., <code>file://</code>)
+            <code>&lt;video src="file:///sdcard/big_buck_bunny_1080p_stereo.ogg" controls&gt;…&lt;/video&gt;</code>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=FRGF77fBAeM">YouTube 360 Video (EQUIRECTANGULAR)</a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=hHW1oY26kxQ">YouTube 2D Video (non-VR)</a>
+        </li>
+        <li>
+          <a href="https://vimeo.com/207528129">Vimeo 360: <em>HELVETIA BY NIGHT</em></a>
+        </li>
+        <li>
+          <a href="https://vimeo.com/241734384">Vimeo 360: <em>Plant Room</em></a>
+        </li>
+        <li>
+          <a href="https://vimeo.com/240634656">Vimeo 2D: <em>W3C Workshop on the Web and Virtual Reality: A Compilation</em></a>
+        </li>
+        <li>
+          <a href="https://aframe.io/aframe/examples/boilerplate/360-video/">A-Frame 360° Videosphere Example (WebVR)
+            <code>&lt;a-scene&gt;
+            <code>&nbsp;&nbsp;&lt;a-assets&gt;
+            <code>&nbsp;&nbsp;&lt;video id=&quot;video&quot; autoplay loop crossorigin=&quot;anonymous&quot;&gt;
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;source src=&quot;https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/&quot;&gt;&lt;/source&gt;
+            <code>&nbsp;&nbsp;&lt;/video&gt;
+            <code>&nbsp;&nbsp;&lt;/a-assets&gt;
+            <code>&nbsp;&nbsp;&lt;a-videosphere src=&quot;#video&quot; rotation=&quot;0 180 0&quot;&gt;&lt;/a-videosphere&gt;
+            <code>&lt;/a-scene&gt;</code>
+          </a>
+        </li>
+        <!--
+        TODO: support `playsinline`
+        TODO: extract video from aframe 360-video for `<video>`
+        -->
       </ol>
     </section>
     <script src="script.js"></script>
