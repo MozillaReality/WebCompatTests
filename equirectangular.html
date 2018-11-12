@@ -3,11 +3,40 @@
   <head>
     <meta charset="utf-8">
     <title>Equirectangular Image</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-      img { height: 100%; width: 100%; }
+      html {
+        background: green;
+        border: 5px solid yellow;
+        margin: 5px;
+        padding: 15px;
+      }
+
+      body {
+        background: red;
+        border: 10px solid orange;
+        margin: 30px;
+        padding: 60px;
+      }
+
+      img {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
     </style>
   </head>
   <body>
-    <img src="flickr_44026728910_e8312e1f7d_o.jpg" alt="Photo of people [alt]" title="Photo of people [title]">
+    <img alt="Photo of people [alt]" title="Photo of people [title]">
+    <script>
+      (() => {
+        const src = new URLSearchParams(window.location.search).get('src');
+        const imgEl = document.querySelector('img');
+        imgEl.setAttribute('src', src);
+        imgEl.addEventListener('click', () => {
+          document.body.requestFullscreen();
+        });
+      })();
+    </script>
   </body>
 </html>
