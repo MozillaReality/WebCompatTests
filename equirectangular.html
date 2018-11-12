@@ -5,6 +5,10 @@
     <title>Equirectangular Image</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       html {
         background: green;
         border: 5px solid yellow;
@@ -34,7 +38,7 @@
         const imgEl = document.querySelector('img');
         imgEl.setAttribute('src', src);
         imgEl.addEventListener('click', () => {
-          document.body.requestFullscreen();
+          imgEl.requestFullscreen();
         });
       })();
     </script>
