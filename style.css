@@ -22,7 +22,7 @@ textarea {
 }
 
 @media (min-width: 800px) {
-  body {
+  [data-layout="index"]  body {
     display: flex;
     padding: 0;
     min-height: 100vh;
