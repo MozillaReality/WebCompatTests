@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>window size</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>body{color:red}</style>
+</head>
+<body>
+  <div id="width"></div>
+  <div id="height"></div>
+  <div id="info"></div>
+
+  <button id="fullscreen">fullscreen</button>
+
+  <script>
+    (function() {
+      let properties = [
+        'window.screen.width',
+        'window.screen.height',
+        'window.innerWidth',
+        'window.innerHeight',
+        'window.outerWidth',
+        'window.outerHeight',
+        'window.devicePixelRatio'
+      ];
+
+      let infoEl = document.querySelector('#info');
+      let updateInfo = () => {
+        let info = '';
+        properties.forEach((prop) => {
+          info += prop + ' ' + eval(prop) + '<br/>';
+        });
+        infoEl.innerHTML = info;
+      }
+      window.addEventListener('resize', updateInfo, false);
+      updateInfo();
+
+      document.querySelector('#fullscreen').addEventListener('click', () => {
+        if (document.body.webkitRequestFullScreen) {
+          document.body.webkitRequestFullscreen();
+        } else {
+          document.body.requestFullscreen();
+        }
+      });
+    })()
+  </script>
+</body>
+</html>
