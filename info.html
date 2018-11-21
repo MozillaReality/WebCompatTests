@@ -76,20 +76,22 @@
         if (navigator.getVRDisplays) {
           logsEl.innerHTML += `<dt>VR displays available</dt><dd id="vr-displays" class="vr-displays"></dd>\n`;
 
+          const vrDisplaysEl = logsEl.querySelector('#vr-displays');
+
           navigator.getVRDisplays().then(displays => {
             var display = displays[0];
+            vrDisplaysEl.innerHTML += `  <ol>\n`;
             if (display) {
-              logsEl.innerHTML += (
-                `  <ol>\n` +
-                `    <li><span><span class="num">displayId: ${display.displayId}</span> — ${display.displayName}</span></li>\n` +
-                `  </ol>\n`
+              vrDisplaysEl.innerHTML += (
+                `    <li><span><span class="num">displayId: ${display.displayId}</span> — ${display.displayName}</span></li>\n`
               );
+              vrDisplaysEl.innerHTML += `  </ol>\n`;
             } else {
-              logsEl.innerHTML += `No VR displays detected\n`;
+              vrDisplaysEl.innerHTML += `No VR displays detected`;
             }
           });
         } else {
-          logsEl.innerHTML += `WebVR API not supported\n`;
+          logsEl.innerHTML += `WebVR API not supported`;
         }
       })();
     </script>
