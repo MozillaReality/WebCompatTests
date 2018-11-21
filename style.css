@@ -21,28 +21,6 @@ textarea {
   padding-top: 1.5rem;
 }
 
-@media (min-width: 800px) {
-  [data-layout="index"]  body {
-    display: flex;
-    padding: 0;
-    min-height: 100vh;
-  }
-
-  .section {
-    min-width: 10rem;
-  }
-
-  .section + .section {
-    border-left: 1px solid #ddd;
-    padding-top: 0;
-  }
-
-  .section,
-  .section + .section {
-    padding: 3rem;
-  }
-}
-
 h2 {
   margin-top: 0;
 }
