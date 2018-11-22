@@ -84,14 +84,16 @@
         logsEl.innerHTML += `<dt><code>navigator.buildID</code> <span class="note">(timestamp of Firefox Build)</span></dt><dd>${navigator.buildID ? `<code>${navigator.buildID}</code>` : '(unavailable)'}</dd>\n`;
 
         logsEl.innerHTML += `<dt>WebXR API enabled</dt><dd>${!!navigator.xr}</dd>`;
-        logsEl.innerHTML += `<dt>WebXR Session Mode: <em>Immersive Presentation</em></dt><dd id="xr-support" class="xr-support"></dd>\n`;
-        const xrSupportEl = logsEl.querySelector('#xr-support');
-        if (navigator.xr.supportsSessionMode) {
-          navigator.xr.supportsSessionMode('immersive-vr').then(() => {
-            xrSupportEl.innerHTML = `<em>Immersive Presentation</em> Session Mode supported`;
-          });
-        } else {
-          xrSupportEl.innerHTML = `<code>navigator.xr.supportsSessionMode</code> method not available`;
+        if (navigator.xr) {
+          logsEl.innerHTML += `<dt>WebXR Session Mode: <em>Immersive Presentation</em></dt><dd id="xr-support" class="xr-support"></dd>\n`;
+          const xrSupportEl = logsEl.querySelector('#xr-support');
+          if (navigator.xr.supportsSessionMode) {
+            navigator.xr.supportsSessionMode('immersive-vr').then(() => {
+              xrSupportEl.innerHTML = `<em>Immersive Presentation</em> Session Mode supported`;
+            });
+          } else {
+            xrSupportEl.innerHTML = `<code>navigator.xr.supportsSessionMode</code> method not available`;
+          }
         }
 
         logsEl.innerHTML += `<dt>WebVR API enabled</dt><dd>${!!navigator.getVRDisplays}</dd>`;
