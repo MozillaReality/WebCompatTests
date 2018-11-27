@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dialogues</title>
+    <link rel="stylesheet" href="common.css">
+  </head>
+  <body>
+    <!-- Learn about `<dialog>` on MDN: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog -->
+    <!-- Simple pop-up dialog box containing a form. -->
+    <dialog id="dialog-favDialog">
+      <form method="dialog">
+        <p><label>Favorite animal:
+          <select>
+            <option></option>
+            <option>Brine shrimp</option>
+            <option>Red panda</option>
+            <option>Spider monkey</option>
+          </select>
+        </label></p>
+        <menu>
+          <button>Cancel</button>
+          <button>Confirm</button>
+        </menu>
+      </form>
+    </dialog>
+    <menu>
+      <button id="dialog-updateDetails">Update details</button>
+    </menu>
+    <div id="dialog-output"></div>
+    <div id="prompts-output"></div>
+    <script>
+      (() => {
+        // `<dialog>`.
+        const updateButtonEl = document.getElementById('dialog-updateDetails');
+        const favDialogEl = document.getElementById('dialog-favDialog');
+        const outputBoxEl = document.getElementById('dialog-output');
+        // “Update details” button opens the `<dialog>` modally.
+        updateButtonEl.addEventListener('click', () => {
+          favDialogEl.showModal();
+          outputBoxEl.innerHTML += `$<div>${favDialog.returnValue} button clicked!</div>`;
+        });
+
+        // `window.confirm`.
+        const promptsBoxEl = document.getElementById('prompts-output');
+        const confirmed = confirm('Do you want to test?');
+        console.log('[confirm] Do you want to test?', confirmed);
+        if (!confirmed) {
+          console.log('Fine! We will not test `prompt` and `alert`!');
+        } else {
+          // `window.prompt`.
+          let value = prompt('What is your name?', 'I. Willnevertell');
+          console.log('[prompt] What is your name?', value);
+          // `window.alert`.
+          alert(`Welcome, ${value}!`);
+          console.log(`[alert] Welcome, ${value}!`);
+
+          value = prompt('Tell me a secret'); // Open the blank prompt window.
+          console.log('[prompt] Tell me a secret', value);
+
+          value = prompt(null, 'Never!'); // Open the blank prompt window.
+          console.log('[prompt] null', value);
+        }
+      })();
+    </script>
+  </body>
+</html>
