@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>window.open</title>
+    <style>
+      html {
+        font-size: 36px;
+      }
+
+      body {
+        font: 1rem/1.3 monospace;
+        width: 10000px;
+        margin: 0;
+        padding: 30px;
+      }
+
+      div[contenteditable] {
+        border: 1px dotted green;
+        padding: 15px;
+      }
+
+      input[type="text"],
+      textarea {
+        padding: 10px;
+      }
+
+      input[type="text"] {
+        min-width: 500px;
+        width: 100%;
+      }
+    </style>
+    <script>
+      /* const popup=window.open('http://example/com')
+      popup.focus(); */
+      var type = "standard";
+      var strWidth = "780";
+      var strHeight = "580";
+
+      window.addEventListener('click', evt => {
+        if (evt.target.closest('[id="popup-standard"]')) {
+          evt.preventDefault();
+          evt.stopPropagation();
+          // if (type === 'fullscreen') {
+          //   strWidth = screen.availWidth;
+          //   strHeight = screen.availHeight;
+          // }
+          var tools = `resizable,toolbar=yes,location=yes,scrollbars=yes,menubar=yes,width=${strWidth},height=${strHeight},top=0,left=0`;
+          /* if (type == "console" || type == "fullscreen") tools = "resizable,toolbar=no,location=no,scrollbars=no,width="+strWidth+",height="+strHeight+",left=0,top=0"; */
+          const newWindow = window.open('popup.html', 'newWin', tools);
+          // newWindow.focus();
+        }
+      });
+
+      var tools = `resizable,toolbar=yes,location=yes,scrollbars=yes,menubar=yes,width=${strWidth},height=${strHeight},top=0,left=0`;
+      const newWindow = window.open('popup.html', 'newWin', tools);
+      if (newWindow) {
+        console.log('pop-up window created');
+        // newWindow.focus();
+      } else {
+        console.log('pop-up window failed to be created');
+      }
+    </script>
+  </head>
+  <body>
+    <a href="#" id="popup-standard"><code>window.open('popup.html', 'newWin', …)</code></a>
+  </body>
+</html>
