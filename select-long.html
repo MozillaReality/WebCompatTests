@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>&lt;select&gt; long</title>
+    <link rel="stylesheet" href="common.css">
+  </head>
+  <body>
+    <h1>&lt;select&gt; with a long list of &lt;option&gt;s</h1>
+    <!-- Source: http://textfiles.com/fun/french.txt -->
+    <p>
+      FUNNY FRENCH PHRASES:  Here is a list of French idioms in use
+      relatively recently in Paris.  We thought you'd like them....
+    </p>
+    <p>FRENCH PHRASE, followed by Literal Translation, followed by
+      (English Equivalent):</p>
+    <select>
+      <option>1. AH LA VACHE!</option>
+      <option>2. C'EST LA FIN DES HARICOTS.</option>
+      <option>3. POSER UN LAPIN.</option>
+      <option>4. AVOIR LE GUEULE DE BOIS.</option>
+      <option>5. FAIRE UN TABAC.</option>
+      <option>6. FAIRE UN BOEUF.</option>
+      <option>7. METTRE LES VOILES.</option>
+      <option>8. SE FAIRE UNE TOILE.</option>
+      <option>9. COMME UN CHEVEAU SUR LA SOUPE.</option>
+      <option>10. FAIRE UN BIDE.</option>
+      <option>11. BOIRE COMME UN TROU.</option>
+      <option>12. PRENDRE LE TAUREAU PAR LES CORNES.</option>
+      <option>13. PRENDRE SON PIED.</option>
+      <option>14. C'EST LE BOUQUET.</option>
+      <option>15. J'EN AI RAS-LE-BOL.</option>
+      <option>16. LES CAROTTES SONT CUITES.</option>
+      <option>17. FAIRE LE PIED DE GRUE.</option>
+      <option>18. MARCHER A COTE DE SES POMPES.</option>
+      <option>19. CHERCHER DES PUCES.</option>
+      <option>20. ARRETE TON CHAR.</option>
+      <option>21. SE FENDRE LA PIPE.</option>
+      <option>22. METTTRE LES PETITS PLATS DANS LES GRANDS.</option>
+      <option>23. SE FARCUR.</option>
+      <option>24. ETRE A LA COLLE.</option>
+      <option>25. ETRE UN BON COUP.</option>
+      <option>26. CIEL, MON MARI!</option>
+      <option value="the &lt;option&gt; one with value"></option>
+      <option></option>
+    </select>
+    <h2>Output</h2>
+    <div id="output" style="background: #def; color: #111; padding: 15px"></div>
+    <script>
+      (() => {
+        const selectEl = document.querySelector('select');
+        const outputEl = document.getElementById('output');
+        selectEl.addEventListener('change', function () {
+          outputEl.textContent = this.value;
+        });
+        outputEl.textContent = selectEl.value;
+      })();
+    </script>
+  </body>
+</html>

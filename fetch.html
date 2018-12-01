@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>fetch request</title>
+    <link rel="stylesheet" href="common.css">
+  </head>
+  <body>
+    <h1>fetch request</h1>
+    <h2>Output</h2>
+    <div id="output"></div>
+    <script>
+      (() => {
+        const outputEl = document.getElementById('output');
+        let method;
+        try {
+          method = new URLSearchParams(window.location.search).get('method');
+        } catch (err) {
+        }
+        method = (method || 'head').toUpperCase();
+        const url = '/';
+        fetch(url, {method}).then(res => {
+          const size = res.headers.get('content-length');
+          console.log(res.headers.get('content-type'));
+          outputEl.innerHTML = `<strong><code>${method}</code></strong> ${url} • request: <strong class="pass">PASS</strong><br><br><code>\n`;
+          for (var pair of res.headers.entries()) {
+            outputEl.innerHTML += `<strong>${pair[0]}</strong>: ${pair[1]}<br>\n`;
+          }
+          outputEl.innerHTML += '</code>\n';
+        }).catch(err => {
+          outputEl.innerHTML = `<strong><code>${method}</code></strong> • request: <strong class="fail">FAIL</strong><br><br><code>${err && err.message}</code>\n`;
+        });
+      })();
+    </script>
+  </body>
+</html>

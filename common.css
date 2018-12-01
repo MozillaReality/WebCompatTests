@@ -16,3 +16,19 @@ a[href]:after {
   color: #333;
   content: attr(href);
 }
+
+#output {
+  border: 1px dotted #ddd;
+  color: #111;
+  padding: 15px;
+}
+
+.pass,
+.success {
+  color: green;
+}
+
+.fail,
+.failure {
+  color: red;
+}
