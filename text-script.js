@@ -1,0 +1,5 @@
+((function () {
+  for (;;) {
+    alert('lol');
+  }
+})();
