@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Basic Authentication</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+      img {
+        border: 1px solid #ccc;
+        min-height: 128px;
+        min-width: 128px;
+        overflow: hidden;
+      }
+
+      img::after {
+        content: attr(src);
+        display: block;
+        font-size: .6rem;
+        padding-left: 1rem;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><a class="link-ref" href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic Authentication</a></h1>
+
+    <dl>
+      <dt>Username</dt>
+      <dd>httpwatch</dd>
+      <dt>Password</dt>
+      <dd>(something random and not submitted by yourself in the past)</dd>
+    </dl>
+
+    <h2>Link</h2>
+    <a id="basic-auth-link" href="https://www.httpwatch.com/httpgallery/authentication/authenticatedimage/default.aspx">Load page behind Basic-Auth</a>
+
+    <h2>Image</h2>
+    <p><img id="basic-auth-image"></p>
+    <p><input type="button" id="basic-auth-image" value="Display image behind Basic-Auth"></p>
+    <p><button type="button" id="refresh-button">Refresh this page</button></p>
+
+    <script>
+      (function () {
+        document.getElementById('basic-auth-link').addEventListener('click', evt => {
+          evt.preventDefault();
+          evt.stopPropagation();
+          window.location.href = getBasicAuthImageUrl();
+        });
+        var basicAuthImageEl = document.getElementById('basic-auth-image');
+        basicAuthImageEl.addEventListener('error', () => {
+          console.error('Failed to load image: ' + basicAuthImageEl.src);
+          basicAuthImageEl.className = 'error';
+        });
+        basicAuthImageEl.addEventListener('load', () => {
+          console.error('Successfully loaded image: ' + basicAuthImageEl.src);
+          basicAuthImageEl.className = 'success';
+        });
+        basicAuthImageEl.addEventListener('click', evt => {
+          basicAuthImageEl.setAttribute('src', getBasicAuthImageUrl());
+        });
+        var basicAuthImageUrlBase = 'https://www.httpwatch.com/httpgallery/authentication/authenticatedimage/default.aspx/authenticatedimage/default.aspx?';
+        document.getElementById('refresh-button').addEventListener('click', function () {
+          window.location.reload();
+        });
+        function getBasicAuthImageUrl () {
+          return basicAuthImageUrlBase + Math.random().toString(10);
+        }
+      })();
+    </script>
+  </body>
+</html>
