@@ -31,10 +31,10 @@
       <dd>(something random and not submitted by yourself in the past)</dd>
     </dl>
 
-    <h2 id="link">Link</h2>
+    <h2>Link</h2>
     <a id="basic-auth-link" href="https://www.httpwatch.com/httpgallery/authentication/authenticatedimage/default.aspx">Load page behind Basic-Auth</a>
 
-    <h2 id="image">Image</h2>
+    <h2>Image</h2>
     <p><img id="basic-auth-image"></p>
     <p><input type="button" id="basic-auth-image" value="Display image behind Basic-Auth"></p>
     <p><button type="button" id="refresh-button">Refresh this page</button></p>
@@ -44,9 +44,15 @@
         document.getElementById('basic-auth-link').addEventListener('click', evt => {
           evt.preventDefault();
           evt.stopPropagation();
-          window.location.href = getBasicAuthImageUrl();
+
+          var location = getBasicAuthImageUrl();
+
+          console.log(`Redirecting to`, location);
+          window.location.href = location;
         });
+
         var basicAuthImageEl = document.getElementById('basic-auth-image');
+
         basicAuthImageEl.addEventListener('error', () => {
           console.error('Failed to load image: ' + basicAuthImageEl.src);
           basicAuthImageEl.className = 'error';
@@ -58,10 +64,29 @@
         basicAuthImageEl.addEventListener('click', evt => {
           basicAuthImageEl.setAttribute('src', getBasicAuthImageUrl());
         });
+
         var basicAuthImageUrlBase = 'https://www.httpwatch.com/httpgallery/authentication/authenticatedimage/default.aspx/authenticatedimage/default.aspx?';
+
         document.getElementById('refresh-button').addEventListener('click', function () {
           window.location.reload();
         });
+
+        if ('URLSearchParams' in window) {
+          var qs = new URLSearchParams(window.location.search);
+
+          if (qs.has('redirect')) {
+            var redirect = parseInt(qs.get('redirect') || '0', 10);
+            if (redirect > -1) {
+              setTimeout(function () {
+                var location = getBasicAuthImageUrl();
+
+                console.log(`[+${redirect}s] Redirecting to`, location);
+                window.location.href = location;
+              }, redirect * 1000);
+            }
+          }
+        }
+
         function getBasicAuthImageUrl () {
           return basicAuthImageUrlBase + Math.random().toString(10);
         }
