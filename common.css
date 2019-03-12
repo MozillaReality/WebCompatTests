@@ -12,9 +12,22 @@ a {
   color: #999;
 }
 
-a[href]:after {
+body > *:first-child {
+  margin-top: 0;
+}
+
+body > *:last-child {
+  margin-bottom: 0;
+}
+
+h1 a[href]::after {
   color: #333;
   content: attr(href);
+}
+
+a.link-ref[href]::after {
+  content: "";
+  display: none;
 }
 
 #output {
@@ -23,12 +36,47 @@ a[href]:after {
   padding: 15px;
 }
 
-.pass,
-.success {
+.success,
+.pass {
+  border-color: green;
   color: green;
 }
 
+.error,
 .fail,
 .failure {
+  border-color: red;
   color: red;
+}
+
+img {
+  display: block;
+}
+
+dt {
+  color: #444;
+  font-weight: bold;
+}
+
+dd {
+  color: #777;
+  margin: 0 0 1rem;
+}
+
+h2 {
+  margin: 2.5rem 0 .625rem;
+}
+
+input[type="button"],
+input[type="submit"],
+button,
+.button {
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
 }
