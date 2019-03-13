@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>&lt;select&gt; and &lt;datalist&gt; drop-down menus</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+      label {
+        color: #999;
+        display: block;
+        font-size: .8rem;
+        padding-bottom: .5rem;
+      }
+
+      label em {
+        background-color: yellow;
+        color: #333;
+        display: block;
+        font-size: .5rem;
+        font-style: normal;
+        margin: .5rem 0;
+        max-width: 500px;
+        padding: .5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>&lt;select&gt; and &lt;datalist&gt; drop-down menus</h1>
+
+    <h2 id="selects">&lt;select&gt;</h2>
+
+    <form>
+      <p id="simple">
+        <label for="simple">A simple select box <em><code>&lt;select&gt;</code></em></label>
+        <select id="simple" name="simple">
+          <option>Banana</option>
+          <option>Cherry</option>
+          <option>Lemon</option>
+        </select>
+        <pre class="code-block"><code>&lt;select&gt;
+  &lt;option&gt;Banana&lt;/option&gt;
+  &lt;option&gt;Cherry&lt;/option&gt;
+  &lt;option&gt;Lemon&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+      </p>
+
+      <hr>
+
+      <p id="optgroup">
+        <label for="groups">Select box with option groups <em><code>&lt;optgroup&gt;</code></em></label>
+        <select id="groups" name="groups">
+          <optgroup label="fruits">
+            <option>Banana</option>
+            <option selected>Cherry</option>
+            <option>Lemon</option>
+          </optgroup>
+          <optgroup label="vegetables">
+            <option>Carrot</option>
+            <option>Eggplant</option>
+            <option>Potato</option>
+          </optgroup>
+        </select>
+        <pre class="code-block"><code>&lt;select&gt;
+  &lt;optgroup label="fruits"&gt;
+    &lt;option&gt;Banana&lt;/option&gt;
+    &lt;option selected&gt;Cherry&lt;/option&gt;
+    &lt;option&gt;Lemon&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="vegetables"&gt;
+    &lt;option&gt;Carrot&lt;/option&gt;
+    &lt;option&gt;Eggplant&lt;/option&gt;
+    &lt;option&gt;Potato&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+      </p>
+
+      <hr>
+
+      <p id="multiple">
+        <label for="multi">Select box allowing multiple selections <em><code>&lt;select multiple&gt;</code></em></label>
+        <select multiple id="multi" name="multi">
+          <option>Banana</option>
+          <option>Cherry</option>
+          <option>Lemon</option>
+        </select>
+        <pre class="code-block"><code>&lt;select multiple&gt;
+  &lt;option&gt;Banana&lt;/option&gt;
+  &lt;option&gt;Cherry&lt;/option&gt;
+  &lt;option&gt;Lemon&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+      </p>
+
+      <hr>
+
+      <p id="datalist">
+        <label for="myFruit">What’s your favourite fruit? <em><code>&lt;datalist&gt;</code></em></label>
+
+        <input type="text" name="myFruit" id="myFruit" list="mySuggestion">
+        <datalist id="mySuggestion">
+          <option>Apple</option>
+          <option>Banana</option>
+          <option>Blackberry</option>
+          <option>Blueberry</option>
+          <option>Lemon</option>
+          <option>Lychee</option>
+          <option>Peach</option>
+          <option>Pear</option>
+        </datalist>
+
+        <pre class="code-block"><code>&lt;input type="text" name="myFruit" id="myFruit" list="mySuggestion"&gt;
+&lt;datalist id="mySuggestion"&gt;
+  &lt;option&gt;Apple&lt;/option&gt;
+  &lt;option&gt;Banana&lt;/option&gt;
+  &lt;option&gt;Blackberry&lt;/option&gt;
+  &lt;option&gt;Blueberry&lt;/option&gt;
+  &lt;option&gt;Lemon&lt;/option&gt;
+  &lt;option&gt;Lychee&lt;/option&gt;
+  &lt;option&gt;Peach&lt;/option&gt;
+  &lt;option&gt;Pear&lt;/option&gt;
+&lt;/datalist&gt;</code></pre>
+      </p>
+
+      <hr class="heavy">
+
+      <h2 id="datalists">&lt;datalist&gt;</h2>
+
+      <p id="datalist-select">
+        <label for="myFruit">What’s your favourite fruit? <em><code>&lt;datalist&gt;</code> with a <code>&lt;select&gt;</code> fallback</em></label>
+
+        <input type="text" id="myFruit" name="fruit" list="fruitList">
+        <datalist id="fruitList">
+          <label for="suggestion">or pick a fruit</label>
+          <select id="suggestion" name="altFruit">
+            <option>Apple</option>
+            <option>Banana</option>
+            <option>Blackberry</option>
+            <option>Blueberry</option>
+            <option>Lemon</option>
+            <option>Lychee</option>
+            <option>Peach</option>
+            <option>Pear</option>
+          </select>
+        </datalist>
+
+        <pre class="code-block"><code>&lt;input type="text" list="fruitList"&gt;
+&lt;datalist id="fruitList"&gt;
+  &lt;label for="suggestion"&gt;or pick a fruit&lt;/label&gt;
+  &lt;select id="suggestion"&gt;
+    &lt;option&gt;Apple&lt;/option&gt;
+    &lt;option&gt;Banana&lt;/option&gt;
+    &lt;option&gt;Blackberry&lt;/option&gt;
+    &lt;option&gt;Blueberry&lt;/option&gt;
+    &lt;option&gt;Lemon&lt;/option&gt;
+    &lt;option&gt;Lychee&lt;/option&gt;
+    &lt;option&gt;Peach&lt;/option&gt;
+    &lt;option&gt;Pear&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/datalist&gt;</code></pre>
+      </p>
+      <p><button type="submit">Submit me!</button></p>
+    </form>
+
+    <hr>
+
+    <p id="multiple-optgroup">
+      <label for="pet-select">
+        What’s your favourite pet?
+        <em><code>&lt;select size="4"&gt; and &lt;option selected&gt;</code></em>
+      </label>
+
+      <select id="pet-select" name="pet" multiple size="4">
+        <option value="none" selected>-- Please choose one or more --</option>
+        <optgroup label="4-legged pets">
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="hamster" disabled>Hamster</option>
+        </optgroup>
+        <optgroup label="Flying pets">
+          <option value="parrot">Parrot</option>
+          <option value="macaw">Macaw</option>
+          <option value="albatross">Albatross</option>
+        </optgroup>
+      </select>
+
+      <pre class="code-block"><code>&lt;select multiple size="4"&gt;
+  &lt;option value="none" selected>-- Please choose one or more --&lt;/option&gt;
+  &lt;optgroup label="4-legged pets"&gt;
+    &lt;option value="dog">Dog&lt;/option&gt;
+    &lt;option value="cat">Cat&lt;/option&gt;
+    &lt;option value="hamster" disabled>Hamster&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="Flying pets"&gt;
+    &lt;option value="parrot">Parrot&lt;/option&gt;
+    &lt;option value="macaw">Macaw&lt;/option&gt;
+    &lt;option value="albatross">Albatross&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+    </p>
+  </body>
+</html>

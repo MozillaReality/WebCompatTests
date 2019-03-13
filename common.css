@@ -64,6 +64,7 @@ dd {
 }
 
 h2 {
+  line-height: 1.1;
   margin: 2.5rem 0 .625rem;
 }
 
@@ -79,4 +80,29 @@ select,
 textarea {
   font-family: inherit;
   font-size: inherit;
+}
+
+.code-block {
+  background-color: #eee;
+  color: #999;
+  font-size: .6rem;
+  padding: .5rem;
+}
+
+hr {
+  background: none;
+  border: none;
+  border-top: 2px dotted #ddd;
+  height: 0;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.heavy {
+  border-top-color: #aaa;
+  border-top-width: 4px;
+}
+
+hr + h2 {
+  margin-top: -.25rem;
 }
