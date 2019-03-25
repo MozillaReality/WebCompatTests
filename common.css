@@ -30,6 +30,12 @@ a.link-ref[href]::after {
   display: none;
 }
 
+h1 code {
+  background: #eee;
+  margin: -2px -4px;
+  padding: 2px 4px;
+}
+
 #output {
   border: 1px dotted #ddd;
   color: #111;
@@ -105,4 +111,34 @@ hr {
 
 hr + h2 {
   margin-top: -.25rem;
+}
+
+.code,
+#output.code {
+  background: #111;
+  color: #39ff14;
+}
+
+.pre {
+  white-space: pre;
+}
+
+.f1 { font-size: 3rem; }
+.f2 { font-size: 2.25rem; }
+.f3 { font-size: 1.5rem; }
+.f4 { font-size: 1.25rem; }
+.f5 { font-size: 1rem; }
+.f6 { font-size: .875rem; }
+.f7 { font-size: .75rem; }
+
+.pre {
+  overflow-x: auto;
+}
+
+.lh-solid {
+  line-height: 1;
+}
+
+.lh-solid-plus {
+  line-height: 1.1;
 }
