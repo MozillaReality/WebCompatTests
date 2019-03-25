@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WebGL and Graphics Capabilities</title>
+    <link rel="stylesheet" href="common.css">
+  </head>
+  <body>
+    <h1 class="lh-solid-plus">WebGL and Graphics Capabilities</h1>
+    <div id="output" class="code pre f7"></div>
+    <script>
+      (function () {
+        function WebGameDebugInfo () {
+          let canvas;
+          const stats = {};
+          const info = {
+            navigator: {
+              appCodeName: navigator.appCodeName,
+              appName: navigator.appName,
+              appVersion: navigator.appVersion,
+              connection: navigator.connection,
+              doNotTrack: navigator.doNotTrack,
+              deviceMemory: navigator.deviceMemory,
+              language: navigator.language,
+              languages: navigator.languages,
+              hardwareConcurrency: navigator.hardwareConcurrency,
+              platform: navigator.platform,
+              product: navigator.product,
+              productSub: navigator.productSub,
+              userAgent: navigator.userAgent,
+              vendor: navigator.vendor,
+              vendorSub: navigator.vendorSub,
+              xr: navigator.xr
+            },
+            supports: {
+              webxr: 'hasNativeWebXRImplementation' in window ? window.hasNativeWebXRImplementation : !!navigator.xr,
+              webvr: 'hasNativeWebVRImplementation' in window ? window.hasNativeWebVRImplementation : !!navigator.vr
+            },
+            libs: {
+              aframe: null,
+              three: null,
+              playcanvas: null,
+              polyfill: null
+            }
+          };
+
+          if (window.THREE) {
+            info.libs.three = {
+              revision: window.THREE.revision
+            };
+          }
+
+          if (window.AFRAME) {
+            canvas = window.AFRAME.scenes ? AFRAME.scenes[0].canvas : document.querySelector('a-scene').canvas;
+            info.supports.webxr = 'hasNativeWebXRImplementation' in window ? window.hasNativeWebXRImplementation : !!navigator.xr;
+            info.supports.webvr = 'hasNativeWebVRImplementation' in window ? window.hasNativeWebVRImplementation : !!navigator.vr;
+            info.libs.aframe = {
+              version: window.AFRAME.version
+            };
+          }
+
+          const polyfill = window.webvrpolyfill && window.webvrpolyfill.constructor.version ? window.webvrpolyfill : window.WebVRPolyfill;
+          if (polyfill) {
+            if ('hasNative' in polyfill) {
+              info.supports.webvr = polyfill.hasNative;
+            }
+            info.libs.polyfill = {
+              version: polyfill.version || (polyfill.constructor && polyfill.constructor.version) || null,
+              config: polyfill.config || null,
+              hasNative: polyfill.hasNative || null,
+              enabled: polyfill.enabled || null
+            };
+          }
+
+          try {
+            stats.aframe = window.aframeStats();
+          } catch (err) {
+          }
+
+          try {
+            stats.browser = window.BrowserStats();
+          } catch (err) {
+          }
+
+          try {
+            stats.gl = window.glStats();
+          } catch (err) {
+          }
+
+          try {
+            stats.three = window.threeStats();
+          } catch (err) {
+          }
+
+          if (window.pc) {
+            info.libs.playcanvas = {
+              version: window.pc.version,
+              revision: window.pc.revision
+            };
+            if (pc.VrManager && 'usesPolyfill' in pc.VrManager) {
+              if (!info.libs.polyfill) {
+                info.libs.polyfill = {};
+              }
+              info.libs.polyfill.enabled = pc.VrManager.usesPolyfill;
+            }
+          }
+
+          if (window.BABYLON) {
+            info.libs.babylon = {
+              version: (window.BABYLON.Engine && BABYLON.Engine.Version) || null
+            };
+          }
+
+          canvas = canvas || document.querySelector('canvas');
+          if (!canvas) {
+            canvas = document.createElement('canvas');
+            canvas.hidden = true;
+            document.body.appendChild(canvas);
+          }
+          try {
+            const gl = canvas.getContext('webgl');
+
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+
+            info.glRenderer = {
+              vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL),
+              render: gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
+            };
+          } catch (err) {
+            console.error(err);
+            // Reading the WebGL context for `WEBGL_debug_renderer_info` in Firefox can fail if a
+            // user has set in `about:config` the `privacy.resistFingerprinting` pref to `true`.
+            // Details: https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_debug_renderer_info#wikiArticle
+          }
+
+          info.stats = stats;
+
+          return info;
+        }
+
+        if (window) {
+          window.WebGameDebugInfo = WebGameDebugInfo;
+          window.webGameDebugInfo = new window.WebGameDebugInfo();
+        } else if (module && module.exports) {
+          module.exports.WebGameDebugInfo = WebGameDebugInfo;
+          module.exports.webGameDebugInfo = new module.exports.WebGameDebugInfo();
+        }
+
+        document.getElementById('output').innerHTML = JSON.stringify(window.webGameDebugInfo, null, 2);
+      })();
+    </script>
+  </body>
+</html>
