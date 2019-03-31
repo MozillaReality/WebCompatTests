@@ -148,7 +148,7 @@
           const gamepadsEl = logsEl.querySelector('#gamepads');
           const gamepads = navigator.getGamepads();
           if (!gamepads || !gamepads.length) {
-            gamepadsEl.innerHTML = `No Gamepads detected <small>(resolved: <code>${JSON.stringify(gamepads)}</code>)</small>`;
+            gamepadsEl.innerHTML = `No gamepads detected <small>(resolved: <code>${JSON.stringify(gamepads)}</code>)</small>`;
             gamepadsEl.classList.add('error');
             return;
           }
@@ -175,7 +175,7 @@
 
               const gamepads = navigator.getGamepads();
               if (!gamepads || !gamepads.length) {
-                vrGamepadsEl.innerHTML = `No Gamepads detected <small>(resolved: <code>${JSON.stringify(gamepads)}</code>)</small>`;
+                vrGamepadsEl.innerHTML = `No gamepads detected <small>(resolved: <code>${JSON.stringify(gamepads)}</code>)</small>`;
                 return;
               }
               vrGamepadsEl.innerHTML = `  <ol>\n` +
