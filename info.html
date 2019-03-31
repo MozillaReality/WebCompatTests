@@ -4,73 +4,78 @@
     <meta charset="utf-8">
     <title>Browser Info</title>
     <style>
-        * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        html {
-          font-size: 24px;
-          font-size: calc(10px + 1vw);
-        }
+      html {
+        font-size: 24px;
+        font-size: calc(10px + 1vw);
+      }
 
-        body {
-          color: #111;
-          font: 1rem/1.3 monospace;
-          padding: 2rem 3rem;
-          max-width: 900px;
-        }
+      body {
+        color: #111;
+        font: 1rem/1.3 monospace;
+        padding: 2rem 3rem;
+        max-width: 900px;
+      }
 
-        .logs dt {
-          border-top: 2px solid #ccc;
-          padding: .25rem 0;
-          font-weight: bold;
-        }
+      .logs dt {
+        border-top: 2px solid #ccc;
+        padding: .25rem 0;
+        font-weight: bold;
+      }
 
-        .logs dd + dt {
-          margin-top: 2rem;
-        }
+      .logs dd + dt {
+        margin-top: 2rem;
+      }
 
-        .logs dd {
-          margin-left: 2.5rem;
-        }
+      .logs dd {
+        margin-left: 2.5rem;
+      }
 
-        .logs ol {
-          color: #ddd;
-          padding: .25rem 0 0 2.5rem;
-        }
+      .logs ol {
+        color: #ddd;
+        padding: .25rem 0 0 2.5rem;
+      }
 
-        .logs li + li {
-          padding-top: .5rem;
-        }
+      .logs li + li {
+        padding-top: .5rem;
+      }
 
-        .logs li > span {
-          color: #111;
-        }
+      .logs li > span {
+        color: #111;
+      }
 
-        hr {
-          background: #ddd;
-          height: 1px;
-          border-width: 0;
-        }
+      hr {
+        background: #ddd;
+        height: 1px;
+        border-width: 0;
+      }
 
-        .note {
-          color: #bbb;
-          font-weight: normal;
-        }
+      .note {
+        color: #bbb;
+        font-weight: normal;
+      }
 
-        .error {
-          color: red;
-        }
+      .error {
+        color: red;
+      }
 
-        dd code {
-          background: #eee;
-          border: 1px solid #ccc;
-          border-radius: 3px;
-          font-weight: 300;
-          padding: 1px 4px;
-        }
+      dd code {
+        background: #eee;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-weight: 300;
+        padding: 1px 4px;
+      }
+
+      .vr-display-stage,
+      .vr-display-dof {
+        opacity: .6;
+      }
     </style>
   </head>
   <body>
@@ -124,12 +129,36 @@
           navigator.getVRDisplays().then(displays => {
             vrDisplaysEl = document.querySelector('#vr-displays');
             if (!displays || !displays.length) {
+              vrDisplaysEl.innerHTML = err;
               vrDisplaysEl.innerHTML = `No VR displays detected <small>(resolved: <code>${JSON.stringify(displays)}</code>)</small>`;
+              return;
             }
             vrDisplaysEl.innerHTML = `  <ol>\n` +
               displays.map(display => {
+                const vrDisplayCaps = {
+                  roomscale: display.stageParameters,
+                  gamepad3dof: null,
+                  gamepad6dof: null
+                };
+                Array.prototype.forEach.call(navigator.getGamepads(), gamepad => {
+                  if (vrDisplayCaps.gamepad3dof === null) {
+                    vrDisplayCaps.gamepad3dof = true;
+                    return;
+                  }
+                  vrDisplayCaps.gamepad6dof = true;
+                });
+                if (vrDisplayCaps.gamepad3dof === null) {
+                  vrDisplayCaps.gamepad3dof = display.displayName && display.displayName.trim() === 'Oculus Go' || display.displayName.trim().toLowerCase() === 'pico g2';
+                }
+                if (vrDisplayCaps.gamepad6dof === null) {
+                  vrDisplayCaps.gamepad6dof = display.displayName && display.displayName.trim() === 'Oculus Quest';
+                }
+
                 return (
-                  `    <li><span class="vr-display-name">${display.displayName}</span> <span class="note">(<code>displayId</code>: <code>${display.displayId}</code>)</span></li>\n`
+                  `    <li>
+                    <span class="vr-display-name">${display.displayName}</span> <span class="note">(<code>displayId</code>: <code>${display.displayId}</code>)</span><br>
+                    <span class="vr-display-stage">${vrDisplayCaps.roomscale ? 'Roomscale' : 'Positional'}</span>; <span class="vr-display-dof">${vrDisplayCaps.gamepad6dof ? '6DoF <small>(2 gamepads supported)</small>' : '3DoF <small>(1 gamepad supported)</small>'}</span>
+                  </li>\n`
                 );
               }) +
               `  </ol>\n`;
@@ -145,37 +174,34 @@
         logsEl.innerHTML += `<dt>Gamepad API enabled</dt><dd>${!!navigator.getGamepads}</dd>`;
         if (navigator.getGamepads) {
           logsEl.innerHTML += `<dt><code>navigator.getGamepads()</code> <span class="note">(gamepads available)</span></dt><dd id="gamepads" class="gamepads"></dd>\n`;
-          const gamepadsEl = logsEl.querySelector('#gamepads');
+          let gamepadsEl = logsEl.querySelector('#gamepads');
           const gamepads = navigator.getGamepads();
           if (!gamepads || !gamepads.length) {
+            gamepadsEl = document.querySelector('#gamepads');
             gamepadsEl.innerHTML = `No gamepads detected <small>(resolved: <code>${JSON.stringify(gamepads)}</code>)</small>`;
             gamepadsEl.classList.add('error');
-            return;
+          } else {
+            gamepadsEl.innerHTML = `  <ol>\n` +
+              Array.prototype.map.call(gamepads, (gamepad, idx) => {
+                if (!gamepad) {
+                  return '<li><code>null</code></li>\n';
+                }
+                return (
+                  `    <li><span class="gamepad-index">${gamepad.index || `[${idx}]`}</span> <span class="note">(<code>id</code>: <code>${gamepad.id}</code>)</span></li>\n`
+                );
+              }).join('') +
+              `  </ol>\n`;
           }
-          gamepadsEl.innerHTML = `  <ol>\n` +
-            Array.prototype.map.call(gamepads, (gamepad, idx) => {
-              if (!gamepad) {
-                return '<li><code>null</code></li>\n';
-              }
-              return (
-                `    <li><span class="gamepad-index">${gamepad.index || `[${idx}]`}</span> <span class="note">(<code>id</code>: <code>${gamepad.id}</code>)</span></li>\n`
-              );
-            }).join('') +
-            `  </ol>\n`;
-        } else {
-          gamepadsEl.innerHTML = err.message;
-          vrGamepadsEl.innerHTML = `Gamepad API not supported`;
-        }
 
-        if (navigator.getGamepads) {
           logsEl.innerHTML += `<dt><code>navigator.getGamepads()</code> after <code>navigator.getVRDisplays()</code> <span class="note">(VR gamepads available)</span></dt><dd id="vr-gamepads" class="vr-gamepads"></dd>\n`;
           let vrGamepadsEl = logsEl.querySelector('#vr-gamepads');
-          if (navigator.getGamepads) {
+          if (navigator.getVRDisplays) {
             navigator.getVRDisplays().then(() => {
-
               const gamepads = navigator.getGamepads();
               if (!gamepads || !gamepads.length) {
+                vrGamepadsEl = document.querySelector('#vr-gamepads');
                 vrGamepadsEl.innerHTML = `No gamepads detected <small>(resolved: <code>${JSON.stringify(gamepads)}</code>)</small>`;
+                vrGamepadsEl.classList.add('error');
                 return;
               }
               vrGamepadsEl.innerHTML = `  <ol>\n` +
@@ -200,6 +226,7 @@
             vrGamepadsEl.classList.add('error');
           }
         } else {
+          gamepadsEl.innerHTML = err.message;
           vrGamepadsEl.innerHTML = `Gamepad API not supported`;
         }
       })();
