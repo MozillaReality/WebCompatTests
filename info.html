@@ -38,7 +38,11 @@
 
         .logs ol {
           color: #ddd;
-          padding-left: 2.5rem;
+          padding: .25rem 0 0 2.5rem;
+        }
+
+        .logs li + li {
+          padding-top: .5rem;
         }
 
         .logs li > span {
@@ -86,10 +90,27 @@
         logsEl.innerHTML += `<dt>WebXR API enabled</dt><dd>${!!navigator.xr}</dd>`;
         if (navigator.xr) {
           logsEl.innerHTML += `<dt>WebXR Session Mode: <em>Immersive Presentation</em></dt><dd id="xr-support" class="xr-support"></dd>\n`;
-          const xrSupportEl = logsEl.querySelector('#xr-support');
+          let xrSupportEl = logsEl.querySelector('#xr-support');
           if (navigator.xr.supportsSessionMode) {
+            let supportsSessionMode = null;
+            let timeout = setTimeout(() => {
+              if (supportsSessionMode === null) {
+                xrSupportEl = document.querySelector('#xr-support');
+                xrSupportEl.innerHTML = `<code>navigator.xr.supportsSessionMode</code> timed out (not resolved nor rejected)`;
+                xrSupportEl.classList.add('error');
+              }
+            }, 1000);
             navigator.xr.supportsSessionMode('immersive-vr').then(() => {
+              supportsSessionMode = true;
+              clearTimeout(timeout);
+              xrSupportEl = document.querySelector('#xr-support');
               xrSupportEl.innerHTML = `<em>Immersive Presentation</em> Session Mode supported`;
+            }).catch(err => {
+              supportsSessionMode = false;
+              clearTimeout(timeout);
+              xrSupportEl = document.querySelector('#xr-support');
+              xrSupportEl.innerHTML = err.message || err;
+              xrSupportEl.classList.add('error');
             });
           } else {
             xrSupportEl.innerHTML = `<code>navigator.xr.supportsSessionMode</code> method not available`;
@@ -99,11 +120,11 @@
         logsEl.innerHTML += `<dt>WebVR API enabled</dt><dd>${!!navigator.getVRDisplays}</dd>`;
         if (navigator.getVRDisplays) {
           logsEl.innerHTML += `<dt><code>navigator.getVRDisplays()</code> <span class="note">(VR displays available)</span></dt><dd id="vr-displays" class="vr-displays"></dd>\n`;
-          const vrDisplaysEl = logsEl.querySelector('#vr-displays');
+          let vrDisplaysEl = document.querySelector('#vr-displays');
           navigator.getVRDisplays().then(displays => {
+            vrDisplaysEl = document.querySelector('#vr-displays');
             if (!displays || !displays.length) {
-              vrDisplaysEl.innerHTML = `No VR displays detected <small>(resolved: <code>${displays}</code>)</small>`;
-              return;
+              vrDisplaysEl.innerHTML = `No VR displays detected <small>(resolved: <code>${JSON.stringify(displays)}</code>)</small>`;
             }
             vrDisplaysEl.innerHTML = `  <ol>\n` +
               displays.map(display => {
@@ -113,11 +134,73 @@
               }) +
               `  </ol>\n`;
           }).catch(err => {
+            vrDisplaysEl = document.querySelector('#vr-displays');
             vrDisplaysEl.innerHTML = err;
             vrDisplaysEl.classList.add('error');
           });
         } else {
           vrDisplaysEl.innerHTML = `WebVR API not supported`;
+        }
+
+        logsEl.innerHTML += `<dt>Gamepad API enabled</dt><dd>${!!navigator.getGamepads}</dd>`;
+        if (navigator.getGamepads) {
+          logsEl.innerHTML += `<dt><code>navigator.getGamepads()</code> <span class="note">(gamepads available)</span></dt><dd id="gamepads" class="gamepads"></dd>\n`;
+          const gamepadsEl = logsEl.querySelector('#gamepads');
+          const gamepads = navigator.getGamepads();
+          if (!gamepads || !gamepads.length) {
+            gamepadsEl.innerHTML = `No Gamepads detected <small>(resolved: <code>${JSON.stringify(gamepads)}</code>)</small>`;
+            gamepadsEl.classList.add('error');
+            return;
+          }
+          gamepadsEl.innerHTML = `  <ol>\n` +
+            Array.prototype.map.call(gamepads, (gamepad, idx) => {
+              if (!gamepad) {
+                return '<li><code>null</code></li>\n';
+              }
+              return (
+                `    <li><span class="gamepad-index">${gamepad.index || `[${idx}]`}</span> <span class="note">(<code>id</code>: <code>${gamepad.id}</code>)</span></li>\n`
+              );
+            }).join('') +
+            `  </ol>\n`;
+        } else {
+          gamepadsEl.innerHTML = err.message;
+          vrGamepadsEl.innerHTML = `Gamepad API not supported`;
+        }
+
+        if (navigator.getGamepads) {
+          logsEl.innerHTML += `<dt><code>navigator.getGamepads()</code> after <code>navigator.getVRDisplays()</code> <span class="note">(VR gamepads available)</span></dt><dd id="vr-gamepads" class="vr-gamepads"></dd>\n`;
+          let vrGamepadsEl = logsEl.querySelector('#vr-gamepads');
+          if (navigator.getGamepads) {
+            navigator.getVRDisplays().then(() => {
+
+              const gamepads = navigator.getGamepads();
+              if (!gamepads || !gamepads.length) {
+                vrGamepadsEl.innerHTML = `No Gamepads detected <small>(resolved: <code>${JSON.stringify(gamepads)}</code>)</small>`;
+                return;
+              }
+              vrGamepadsEl.innerHTML = `  <ol>\n` +
+                gamepads.map((gamepad, idx) => {
+                  if (!gamepad) {
+                    return '<li><code>null</code></li>\n';
+                  }
+                  return (
+                    `    <li><span class="gamepad-index">${gamepad.index || `[${idx}]`}</span> <span class="note">(<code>id</code>: <code>${gamepad.id}</code>)</span></li>\n`
+                  );
+                }).join('') +
+                `  </ol>\n`;
+
+            }).catch(err => {
+              vrGamepadsEl = document.querySelector('#vr-gamepads');
+              console.dir(err)
+              vrGamepadsEl.innerHTML = err.message || err;
+              vrGamepadsEl.classList.add('error');
+            });
+          } else {
+            vrGamepadsEl.innerHTML = `WebVR API not supported`;
+            vrGamepadsEl.classList.add('error');
+          }
+        } else {
+          vrGamepadsEl.innerHTML = `Gamepad API not supported`;
         }
       })();
     </script>
