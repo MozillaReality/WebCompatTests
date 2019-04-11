@@ -20,6 +20,10 @@ body > *:last-child {
   margin-bottom: 0;
 }
 
+h1 {
+  margin-bottom: 3rem;
+}
+
 h1 a[href]::after {
   color: #333;
   content: attr(href);
